@@ -1,0 +1,5 @@
+.git
+vendor
+var/*.sqlite*
+.phpunit.cache
+.php-cs-fixer.cache
