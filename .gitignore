@@ -1,0 +1,5 @@
+/vendor/
+/var/*.sqlite
+/var/*.sqlite-*
+.phpunit.cache
+.php-cs-fixer.cache

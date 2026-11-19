@@ -1,0 +1,71 @@
+{
+    "name": "frandigon6alves/bookmarks-api",
+    "description": "A small REST JSON API to save and organize bookmarks, with RFC 9457 errors translated into English, Spanish and Brazilian Portuguese.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": ["bookmarks", "rest", "api", "slim", "sqlite", "i18n", "problem-details"],
+    "authors": [
+        {
+            "name": "Franciellen Gonçalves"
+        }
+    ],
+    "require": {
+        "php": "~8.4.0",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "slim/psr7": "^1.7",
+        "slim/slim": "^4.14",
+        "symfony/translation": "^7.3 || ^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bookmarks\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bookmarks\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php bin/migrate.php",
+            "@php -d expose_php=0 -S 0.0.0.0:8080 -t public public/index.php"
+        ],
+        "migrate": "@php bin/migrate.php",
+        "test": "phpunit",
+        "analyse": "phpstan analyse --memory-limit=512M --no-progress",
+        "cs": "php-cs-fixer check --diff",
+        "cs:fix": "php-cs-fixer fix",
+        "check": [
+            "@cs",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "scripts-descriptions": {
+        "serve": "Run migrations and start the PHP built-in server on port 8080.",
+        "migrate": "Apply pending SQLite migrations.",
+        "test": "Run the PHPUnit test suites.",
+        "analyse": "Run PHPStan at level max.",
+        "cs": "Check coding style (PER-CS) without changing files.",
+        "cs:fix": "Fix coding style in place.",
+        "check": "Run coding style, static analysis and tests."
+    }
+}
